@@ -22,5 +22,5 @@ Route::resource('User','UserController');
 
 Route::resource('recipe', 'RecipeController');
 Route::get('recipee', 'RecipeController@getRecipes');
-
+Route::post('upload', 'UploadController@upload');
 Auth::routes();
