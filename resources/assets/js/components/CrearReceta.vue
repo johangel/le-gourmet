@@ -9,7 +9,7 @@
           <div class="progress-bar bg-dark progress-bar-striped progress-bar-animated transition" role="progressbar" :style="{width: barra + '%'}" v-bind="{'aria-valuenow': barra}" aria-valuemin="0" aria-valuemax="96"></div>
         </div>
         <br>
-        <form class="" action="" method="post">
+        <form  v-on:submit.prevent="guardarReceta"class="" action="" method="post">
           <div class="row" style="margin-bottom: 15px;">
 
             <div class="col">
@@ -70,7 +70,7 @@
           </div>
         <div class="row justify-content-center" style="margin: 20px 0px; padding: 0;">
           <div class="col-md-6" style="padding:0; ">
-            <button type="button" name="button" class="btn btn-dark" v-bind:class="{disabled : disabledd}">Guardar receta</button>
+            <button type="submit"  name="button" class="btn btn-dark" v-bind:class="{disabled : disabledd}">Guardar receta</button>
           </div>
 
         </div>
@@ -107,7 +107,7 @@
 
 
 <script>
-import VueClip from 'vue-clip'
+import axios from 'axios'
 
 export default {
 data: function(){
@@ -135,7 +135,6 @@ methods:{
     console.log(this.imagen);
     this.ActualizarBarra();
   },
-
   crearEpacioReceta: function(){
     this.ingredientes.push({
       nombre:''
@@ -149,7 +148,6 @@ methods:{
       }
     }
   },
-
   ActualizarBarra: function(){
     this.barra = 0;
     if(this.Nombre_Receta != ''){
@@ -184,8 +182,28 @@ methods:{
     }else{
       this.disabledd = true;
     }
+  },
+  guardarReceta: function(){
+    var url = 'guardar-receta';
+    axios.post(url,{
+      name: this.Nombre_Receta,
+      ingredients: this.ingredientes,
+      category: this.categoria,
+      timesVoted: '0',
+      totalvotes: '0',
+      instructions: this.instrucciones,
+      description: this.descripcion,
+      author: 'johangel',
+      origen: this.origen,
+      img: 'fdfs',
+      horas: this.hora,
+      min: this.minutos,
+    }).then(response =>{
+      console.log(response);
+    }).catch(error=>{
+      console.log(error.response)
+    })
   }
-
 
 }
 }

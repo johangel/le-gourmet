@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\recipes;
+use App\Recipe;
 class RecipesSeedeer extends Seeder
 {
     /**

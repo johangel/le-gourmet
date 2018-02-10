@@ -33,5 +33,10 @@ $factory->define(App\recipes::class, function (Faker $faker) {
         'instructions' =>$faker->sentence,
         'description' =>$faker->sentence,
         'author' => $faker->name,
+        'horas' => rand(0,2),
+        'min' => rand(0,60),
+        'img' => $faker->sentence,
+        'origen' => $faker->sentence,
     ];
+
 });

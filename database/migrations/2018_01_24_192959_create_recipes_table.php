@@ -23,6 +23,10 @@ class CreateRecipesTable extends Migration
           $table->text('instructions');
           $table->string('description');
           $table->string('author');
+          $table->string('origen');
+          $table->string('img');
+          $table->string('horas');
+          $table->string('min');
           $table->timestamps();
         });
     }
@@ -34,6 +38,6 @@ class CreateRecipesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('recipes');
+        Schema::dropIfExists('Recipe');
     }
 }

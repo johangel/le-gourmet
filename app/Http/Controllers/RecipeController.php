@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Recipe;
+use App\recipes;
 
 class RecipeController extends Controller
 {
@@ -17,8 +17,9 @@ class RecipeController extends Controller
       return view('recipe.crearReceta');
     }
 
-    public function store(){
-
+    public function store(Request $request){
+      recipes::create($request->all());
+      return;
     }
     public function show(){
       return view('recipe.vistaReceta');

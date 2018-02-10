@@ -14,14 +14,15 @@
 Route::get('/', function () {
     return view('./auth/login');
 });
-
+Route::get('/register', function () {
+    return view('./auth/register');
+});
 Route::get('/home', function () {
     return view('./recipe/home');
 });
 Route::resource('User','UserController');
-
+Route::post('/recipe/guardar-receta','RecipeController@store');
 Route::resource('recipe', 'RecipeController');
 Route::get('recipee', 'RecipeController@getRecipes');
 Route::post('upload', 'UploadController@upload');
-Route::get('recipe/{$id}','RecipeController@show');
 Auth::routes();

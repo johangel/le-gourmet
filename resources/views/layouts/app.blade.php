@@ -34,7 +34,7 @@
                 <a class="nav-link" href="#">Log in <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Sing in</a>
+                <a class="nav-link" href="/register">Sign in</a>
               </li>
             </ul>
             @else
