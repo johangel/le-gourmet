@@ -21,7 +21,7 @@
 </head>
 <body>
     <div id="app" style="height: 600px;">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between" style="position:fixed; width:100%; z-index:3;">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between" style="position:fixed; width:100%; z-index:3; height: 9vh;">
 
         <a class="navbar-brand" href="#">
           <img style="background: #343a40;" src="/media/logo.png" width="32" height="32" alt="">
@@ -47,7 +47,7 @@
                 <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Ranking</a>
+                <a class="nav-link" href="/ranking">Ranking</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -18,6 +18,7 @@ window.Vue = require('vue');
 Vue.component('galeria', require('./components/Galeria.vue'));
 Vue.component('perfil', require('./components/perfil.vue'));
 Vue.component('crearreceta', require('./components/CrearReceta.vue'));
+Vue.component('ranking', require('./components/ranking.vue'));
 
 const app = new Vue({
     el: '#app'

@@ -20,5 +20,8 @@ class RecipeController extends Controller
     public function store(){
 
     }
+    public function show(){
+      return view('recipe.vistaReceta');
+    }
 
 }
