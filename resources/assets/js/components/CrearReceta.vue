@@ -124,16 +124,24 @@ data: function(){
     imagen: '',
     url:'',
     disabledd: true,
+    image:''
   }
 },
 methods:{
   procesarImagen: function(){
     var file = document.getElementById('file');
-    console.log(file.files[0].name);
     this.url = URL.createObjectURL(file.files[0]);
     this.imagen = file.files[0].name;
-    console.log(this.imagen);
     this.ActualizarBarra();
+
+    /* metodo de tutorial */
+    var e = event;
+    console.log(e.target);
+    var filereader = new FileReader();
+    filereader.readAsDataURL(e.target.files[0]);
+    filereader.onload = (e) => {
+    this.image = e.target.result;
+    }
   },
   crearEpacioReceta: function(){
     this.ingredientes.push({
@@ -195,9 +203,9 @@ methods:{
       description: this.descripcion,
       author: 'johangel',
       origen: this.origen,
-      img: 'fdfs',
       horas: this.hora,
       min: this.minutos,
+      image:this.image
     }).then(response =>{
       console.log(response);
     }).catch(error=>{

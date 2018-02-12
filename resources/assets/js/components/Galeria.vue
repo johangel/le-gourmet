@@ -56,6 +56,7 @@ import axios from 'axios'
           var urlRecipes = 'recipee';
           axios.get(urlRecipes).then(response =>{
             this.recipes = response.data;
+
           });
 
         }

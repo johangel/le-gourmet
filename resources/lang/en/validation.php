@@ -13,6 +13,8 @@ return [
     |
     */
 
+
+    ],
     'accepted'             => 'The :attribute must be accepted.',
     'active_url'           => 'The :attribute is not a valid URL.',
     'after'                => 'The :attribute must be a date after :date.',
@@ -98,7 +100,7 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
+    'image64' => 'The :attribute must be a file of type: :values.',
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
