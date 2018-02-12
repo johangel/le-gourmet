@@ -54,7 +54,7 @@
                   {{Auth::user()->name}}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="{{ route('User.show','2')}}" >perfil</a>
+                  <a class="dropdown-item" href="{{ route('User.show','self')}}" >perfil</a>
                   <a class="dropdown-item" href="#">opciones</a>
                   <a class="dropdown-item" onclick="event.preventDefault();
                            document.getElementById('logout-form').submit();" href="{{ route('logout') }}">Salir</a>
