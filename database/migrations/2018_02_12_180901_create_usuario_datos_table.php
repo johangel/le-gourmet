@@ -19,8 +19,9 @@ class CreateUsuarioDatosTable extends Migration
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
             $table->string('correoUsuario');
+            $table->string('nombre');
             $table->string('descripcion')->nullable();
-            $table->string('cumpleaños')->nullable();
+            $table->string('nacionalidad')->nullable();
             $table->string('categoriasFavoritas')->nullable();
             $table->string('imagen_perfil')->nullable();
             $table->string('edad')->nullable();

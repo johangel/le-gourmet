@@ -13,12 +13,32 @@ class RecipeController extends Controller
       return $recipes;
     }
 
+    public function editar($id, Request $request){
+      $receta = recipes::find($id);
+      if($request->name != ''){
+        $receta->name = $request->name;
+      }
+      if($request->description != ''){
+        $receta->description = $request->description;
+      }
+      if($request->instructions != ''){
+        $receta->instructions = $request->instructions;
+      }
+      $receta->save();
+      return($receta);
+    }
+
+    public function getRecipesProfile($name){
+      $Informacion = recipes::where('author', urldecode($name))->get();
+      return $Informacion;
+    }
+
     public function create(){
       return view('recipe.crearReceta');
     }
 
     public function store(Request $request)
-    {
+      {
       $exploded = explode(',', $request->image);
 
       $decoded = base64_decode($exploded[1]);
@@ -40,8 +60,15 @@ class RecipeController extends Controller
 
       return;
     }
-    public function show(){
-      return view('recipe.vistaReceta');
+
+    public function eliminarReceta($id){
+      recipes::where('id', $id)->delete();
+      return;
+    }
+
+    public function CagrgarReceta($id){
+      $receta = recipes::where('id', $id)->get();
+      return $receta;
     }
 
 }

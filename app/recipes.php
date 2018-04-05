@@ -13,13 +13,14 @@ class recipes extends Model
   protected $fillable = ['name',
   'ingredients',
   'category',
-  'timesVoted',
-  'totalvotes',
+  'UpVotes',
+  'DownVotes',
   'instructions',
   'description',
   'author',
   'origen',
   'img',
   'horas',
-  'min'];
+  'min'
+];
 }

@@ -15,11 +15,12 @@ class UsuarioDatos extends Model
     'twitter',
     'nacionalidad',
     'edad',
+    'nombre',
     'correoUsuario',
     'descripcion',
     'imagen_perfil',
     'cumpleaños',
-    'categoriasFavoritas'
+    'categoriasFavoritas',
   ];
 
   }

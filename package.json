@@ -20,6 +20,8 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "moment": "^2.20.1",
+        "toastr": "^2.1.4",
         "vue-clip": "^1.0.0"
     }
 }
