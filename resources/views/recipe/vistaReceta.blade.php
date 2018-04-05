@@ -1,4 +1,4 @@
 @extends('layouts.app')
 @section('content')
-<ranking></ranking>
+<receta></receta>
 @endsection

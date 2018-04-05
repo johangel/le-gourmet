@@ -18,8 +18,8 @@ class CreateRecipesTable extends Migration
           $table->string('name');
           $table->json('ingredients');
           $table->string('category');
-          $table->integer('timesVoted');
-          $table->integer('totalvotes');
+          $table->integer('UpVotes');
+          $table->integer('DownVotes');
           $table->text('instructions');
           $table->string('description');
           $table->string('author');
@@ -38,6 +38,6 @@ class CreateRecipesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Recipe');
+        Schema::dropIfExists('recipes');
     }
 }

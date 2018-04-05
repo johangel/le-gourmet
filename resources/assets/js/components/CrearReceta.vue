@@ -9,7 +9,7 @@
           <div class="progress-bar bg-dark progress-bar-striped progress-bar-animated transition" role="progressbar" :style="{width: barra + '%'}" v-bind="{'aria-valuenow': barra}" aria-valuemin="0" aria-valuemax="96"></div>
         </div>
         <br>
-        <form  v-on:submit.prevent="guardarReceta"class="" action="" method="post">
+        <form v-on:submit.prevent="guardarReceta" class="" action="" method="post">
           <div class="row" style="margin-bottom: 15px;">
 
             <div class="col">
@@ -21,13 +21,14 @@
           </div>
 
           <div class="form-group">
-            <textarea type="text" v-on:keyup="ActualizarBarra()" v-model='descripcion' class="form-control" id="formGroupExampleInput2" placeholder="Descripcion de receta(breve)">aa</textarea>
+            <textarea type="text" v-on:keyup="ActualizarBarra()" v-model='descripcion' class="form-control" id="formGroupExampleInput3" placeholder="Descripcion de receta(breve)">aa</textarea>
           </div>
           <div class="form-group">
-            <textarea type="text" v-on:keyup="ActualizarBarra()" v-model='instrucciones' class="form-control" id="formGroupExampleInput2" placeholder="Instrucciones para preparar receta"></textarea>
+            <textarea type="text" v-on:keyup="ActualizarBarra()" v-model='instrucciones' class="form-control" id="formGroupExampleInput4" placeholder="Instrucciones para preparar receta"></textarea>
           </div>
           <div class="row">
             <div class="col">
+
               <select v-model='categoria' class="form-control" @change="ActualizarBarra()" style="margin-bottom: 10px;" id="exampleFormControlSelect1">
                 <option>Postre</option>
                 <option>Panaderia</option>
@@ -39,16 +40,19 @@
                 <option>Otros</option>
               </select>
               <div class="row" style="padding: 0 15px">
-                <p class="text-muted">Tiempo estimado</p>
+                <p class="text-muted">Horas estimadas</p>
                 <input v-model="hora" v-on:keyup="ActualizarBarra()" type="text"  class="form-control" maxlength="2" style="margin-left:10px; width:15%; text-align:center; padding: 0.5rem 0.5rem; height:25px;" name="" value="">
                 <small style="margin-left:10px;" class="text-muted">:</small>
                 <input v-model="minutos"  v-on:keyup="ActualizarBarra()" type="text" class="form-control" maxlength="2" style="margin-left:10px; width:15%; text-align:center; padding: 0.5rem 0.5rem; height:25px;" name="" value="">
             </div>
           </div>
+
+
+
             <!--Area preview-->
 
-
             <div class="col">
+
               <ul class="list-group">
                 <li class="list-group-item margen-li borde_bootstrap" style="position:relative;"><p style="margin:0px" class="lead">Ingredientes</p>
                   <a v-on:click.prevent v-on:click="crearEpacioReceta()" class="btn btn-sm btn-default clickeable" style="position:absolute; top:3px; right:0px;">
@@ -57,13 +61,13 @@
                 </li>
 
                 <div class="" style="position:relative" v-for="ingrediente in ingredientes">
-                  <input v-model="ingrediente.nombre"  type="text"  v-on:keyup="ActualizarBarra()" placeholder="1kg Papa, 1Litro Leche" class="form-control list-group-item margen-li">
+                  <input v-model="ingrediente.nombre"  type="text"  v-on:keyup="ActualizarBarra()" placeholder="Ej: 1kg Papa" class="form-control list-group-item margen-li">
                   <a href="#"  v-on:click.prevent v-on:click="eliminarEspacioReceta(ingrediente.nombre)" class="clickeable" style="position:absolute; top:2px; right:10px;">
                   <img style="color:red;" src="/iconos/eliminar.svg" width="20px" height="20px" alt=""> </a>
-         </div>
+                </div>
               </ul>
+
             </div>
-            </select>
           </div>
           <div class="row" style="margin: 10px 0px; padding: 0;">
               <input type="file" @change="procesarImagen() " class="form-control" name="file" id="file">
@@ -85,7 +89,7 @@
         <div class="">
           <p class="lead">{{descripcion}}</p>
           <p>{{instrucciones}}</p>
-          <img v-if="hora" src="/iconos/reloj.svg" width="20px" height="20px" alt=""><small v-if="hora" style="margin-left:5px;" class="text-muted">{{hora}}:{{minutos}} mins</small>
+          <img v-if="hora" src="/iconos/reloj.svg" width="20px" height="20px" alt=""><small v-if="hora" style="margin-left:5px;" class="text-muted">{{hora}}:{{minutos}} hrs</small>
         </div>
 
         <div class="row" style="margin-top:10px;">
@@ -94,7 +98,9 @@
               <li v-for="ingrediente in ingredientes">{{ingrediente.nombre}}</li>
             </ul>
           </div>
-          <div v-if="url" class="col-md-6">
+          <div v-if="url" class="col-md-6" style="position:relative;">
+            <a href="#"  v-on:click.prevent v-on:click="eliminarImagen" class="clickeable" style="position:absolute; top:10px; right:25px;">
+            <img style="color:red;" src="/iconos/eliminar_blanco.svg" width="30px" height="30px" alt=""> </a>
             <img v-bind:src="url" alt="..." class="img-thumbnail">
           </div>
         </div>
@@ -108,8 +114,11 @@
 
 <script>
 import axios from 'axios'
+import moment from 'moment'
+import toastr from 'toastr'
 
 export default {
+
 data: function(){
   return{
     ingredientes:[],
@@ -124,22 +133,45 @@ data: function(){
     imagen: '',
     url:'',
     disabledd: true,
+    image:'',
+    author:'',
+    idPerfil:''
   }
 },
+created: function(){
+    this.author = $('meta[name="authUsername"]').attr("content");
+    console.log(this.author);
+},
+
 methods:{
   procesarImagen: function(){
     var file = document.getElementById('file');
-    console.log(file.files[0].name);
     this.url = URL.createObjectURL(file.files[0]);
     this.imagen = file.files[0].name;
-    console.log(this.imagen);
     this.ActualizarBarra();
+
+    /* metodo de tutorial */
+    var e = event;
+    var filereader = new FileReader();
+    filereader.readAsDataURL(e.target.files[0]);
+    filereader.onload = (e) => {
+    this.image = e.target.result;
+    }
   },
+
+  eliminarImagen: function(){
+    this.url='';
+    this.imagen='';
+    this.ActualizarBarra();
+    document.getElementById('file').file.files[0].name = 'null';
+  },
+
   crearEpacioReceta: function(){
     this.ingredientes.push({
       nombre:''
     });
   },
+
   eliminarEspacioReceta: function(ingrediente){
     for(var i=0; i<this.ingredientes.length; i++){
       if(this.ingredientes[i].nombre == ingrediente){
@@ -148,6 +180,7 @@ methods:{
       }
     }
   },
+
   ActualizarBarra: function(){
     this.barra = 0;
     if(this.Nombre_Receta != ''){
@@ -183,27 +216,34 @@ methods:{
       this.disabledd = true;
     }
   },
+
   guardarReceta: function(){
     var url = 'guardar-receta';
     axios.post(url,{
       name: this.Nombre_Receta,
       ingredients: this.ingredientes,
       category: this.categoria,
-      timesVoted: '0',
-      totalvotes: '0',
+      UpVotes: '0',
+      DownVotes: '0',
       instructions: this.instrucciones,
       description: this.descripcion,
-      author: 'johangel',
+      author: this.author,
       origen: this.origen,
-      img: 'fdfs',
       horas: this.hora,
       min: this.minutos,
+      image:this.image
     }).then(response =>{
       console.log(response);
+      toastr.success('Receta agregada');
     }).catch(error=>{
       console.log(error.response)
+      if(this.barra < 99){
+        toastr.error('Llenar todos los campos');
+      }else{
+      toastr.error('No se pudo guardar receta');
+      }
     })
-  }
+  },
 
 }
 }

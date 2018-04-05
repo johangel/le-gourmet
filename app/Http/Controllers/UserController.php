@@ -12,7 +12,7 @@ public function __construct()
     $this->middleware('auth');
 }
 
-public function show($id)
+public function show($name)
 {
   return  view('./recipe/perfil');
 }
